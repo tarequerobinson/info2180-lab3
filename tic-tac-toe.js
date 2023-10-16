@@ -18,13 +18,24 @@ document.addEventListener('DOMContentLoaded', function () {
       console.log(newGameButtom);
 
       newGameButtom.onclick = function() {
-        for (var i = 0; i < squares.length; i++) {
-            squares[i].innerHTML = '';
-          }
+        // for (var i = 0; i < squares.length; i++) {
+        //     squares[i].innerHTML = '';
+        //   }
 
-          status.innerHTML = "Move your mouse over a square and click to play an X or an O.";
+        //   status.innerHTML = "Move your mouse over a square and click to play an X or an O.";
 
-          console.log("game reset");
+        //   gameBoard = [
+        //     ['', '', ''],
+        //     ['', '', ''],
+        //     ['', '', '']
+        //   ];
+
+        //   addClickListeners();
+        //   handleSquareClick();
+    
+
+        //   console.log("game reset");
+        location.reload() 
 
         // alert("Button clicked!");
     };
@@ -48,7 +59,19 @@ document.addEventListener('DOMContentLoaded', function () {
       // Loop through each square and add the 'square' class
       for (var i = 0; i < squares.length; i++) {
         squares[i].classList.add('square');
+        // squares[i].onmouseover = function(){squares[i].classList.add('hover')};
+        // add the hover class to the targeted element where the event occurs 
+        squares[i].addEventListener("mouseover", (event)=>{ event.target.classList.add('hover')});
+
+                // Remove hover class on mouseout
+        squares[i].addEventListener("mouseout", function (event) {
+              event.target.classList.remove('hover');
+            });
+      
+
       }
+
+
     }
 
   
@@ -163,16 +186,24 @@ document.addEventListener('DOMContentLoaded', function () {
         if (checkHorizontalWin() != false ) {
 
             status.innerHTML = checkHorizontalWin();
+            status.classList.add('you-won');
+
+
+            
 
 
             // console.log("We have a winner!");
         } 
         else if (checkVerticalWin() != false) {
             status.innerHTML = checkVerticalWin();
+            status.classList.add('you-won');
+
             // console.log("No winner yet.");
         }
         else if (checkDiagonalWin() != false) {
             status.innerHTML = checkDiagonalWin();
+            status.classList.add('you-won');
+
 
 
             
