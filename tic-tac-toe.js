@@ -167,10 +167,10 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function checkDiagonalWin() {
-        if ((gameBoard[0][0] !== '' && gameBoard[0][0] === gameBoard[1][1] && gameBoard[1][1] === gameBoard[2][2]) && (gameBoard[2][2] == 'X') ) {
-            return 'Congratulations! X is the Winner!' ; // There is a diagonal win from top-left to bottom-right
-        }
-        else if ((gameBoard[0][0] !== '' && gameBoard[0][0] === gameBoard[1][1] && gameBoard[1][1] === gameBoard[2][2]) && (gameBoard[2][2] == 'O') ){
+      if ((gameBoard[2][0] !== '' && gameBoard[2][0] === gameBoard[1][1] && gameBoard[1][1] === gameBoard[0][2]) && (gameBoard[0][2] == 'X') ) {
+        return 'Congratulations! X is the Winner!' ; // There is a diagonal win from top-left to bottom-right
+    }
+    else if ((gameBoard[0][0] !== '' && gameBoard[0][0] === gameBoard[1][1] && gameBoard[1][1] === gameBoard[2][2]) && (gameBoard[2][2] == 'O') ){
             return 'Congratulations! O is the Winner!'; // There is a diagonal win from top-right to bottom-left
         }
         return false; // No diagonal win
