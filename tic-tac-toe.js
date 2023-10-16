@@ -4,10 +4,32 @@ document.addEventListener('DOMContentLoaded', function () {
       // Get the board div
       var board = document.getElementById('board');
       console.log(board);
+
+      var status = document.getElementById('status');
+      console.log(status);
+
+
   
       // Get all child divs within the board div
       var squares = board.getElementsByTagName('div');
       console.log(squares);
+
+      var newGameButtom = document.querySelector('button');
+      console.log(newGameButtom);
+
+      newGameButtom.onclick = function() {
+        for (var i = 0; i < squares.length; i++) {
+            squares[i].innerHTML = '';
+          }
+
+          status.innerHTML = "Move your mouse over a square and click to play an X or an O.";
+
+          console.log("game reset");
+
+        // alert("Button clicked!");
+    };
+    
+
 
       var gameBoard = [
         ['', '', ''],
@@ -30,7 +52,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
   
-    
 
     var currentPlayer = 'X'; // Initialize the current player
 
@@ -73,6 +94,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
       winners();
+      
+      
+    //   status.innerHTML = checkHorizontalWin();
+
+
+
 
       // Switch to the other player for the next turn
       currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
@@ -90,8 +117,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function checkHorizontalWin() {
         for (var i = 0; i < gameBoard.length; i++) {
-            if (gameBoard[i][0] !== '' && gameBoard[i][0] === gameBoard[i][1] && gameBoard[i][1] === gameBoard[i][2]) {
-                return true; // There is a horizontal win
+            if ((gameBoard[i][0] !== '' && gameBoard[i][0] === gameBoard[i][1] && gameBoard[i][1] === gameBoard[i][2]) && (gameBoard[i][2] == 'X') ) {
+                return 'Congratulations! X is the Winner!'; // There is a horizontal win for player x 
+            }
+            else if ((gameBoard[i][0] !== '' && gameBoard[i][0] === gameBoard[i][1] && gameBoard[i][1] === gameBoard[i][2]) && (gameBoard[i][2] == 'O') ) {
+
+                return 'Congratulations! O is the Winner!'; // There is a horizontal win for player x 
+
+
             }
         }
         return false; // No horizontal win
@@ -99,19 +132,23 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function checkVerticalWin() {
         for (var j = 0; j < gameBoard[0].length; j++) {
-            if (gameBoard[0][j] !== '' && gameBoard[0][j] === gameBoard[1][j] && gameBoard[1][j] === gameBoard[2][j]) {
-                return true; // There is a vertical win
+            if ((gameBoard[0][j] !== '' && gameBoard[0][j] === gameBoard[1][j] && gameBoard[1][j] === gameBoard[2][j]) && (gameBoard[2][j] == 'O') ) {
+                return 'Congratulations! O is the Winner!'; // There is a vertical win
             }
+            else if ((gameBoard[0][j] !== '' && gameBoard[0][j] === gameBoard[1][j] && gameBoard[1][j] === gameBoard[2][j]) && (gameBoard[2][j] == 'X') ){
+                return 'Congratulations! X is the Winner!'; // There is a vertical win
+            }
+
         }
         return false; // No vertical win
     }
 
     function checkDiagonalWin() {
-        if (gameBoard[0][0] !== '' && gameBoard[0][0] === gameBoard[1][1] && gameBoard[1][1] === gameBoard[2][2]) {
-            return true; // There is a diagonal win from top-left to bottom-right
+        if ((gameBoard[0][0] !== '' && gameBoard[0][0] === gameBoard[1][1] && gameBoard[1][1] === gameBoard[2][2]) && (gameBoard[2][2] == 'X') ) {
+            return 'Congratulations! X is the Winner!' ; // There is a diagonal win from top-left to bottom-right
         }
-        if (gameBoard[0][2] !== '' && gameBoard[0][2] === gameBoard[1][1] && gameBoard[1][1] === gameBoard[2][0]) {
-            return true; // There is a diagonal win from top-right to bottom-left
+        else if ((gameBoard[0][0] !== '' && gameBoard[0][0] === gameBoard[1][1] && gameBoard[1][1] === gameBoard[2][2]) && (gameBoard[2][2] == 'O') ){
+            return 'Congratulations! O is the Winner!'; // There is a diagonal win from top-right to bottom-left
         }
         return false; // No diagonal win
     }
@@ -123,11 +160,24 @@ document.addEventListener('DOMContentLoaded', function () {
 
     
     function winners() {
-        if (checkHorizontalWin() || checkVerticalWin() || checkDiagonalWin()) {
-            console.log("We have a winner!");
-        } else {
-            console.log("No winner yet.");
+        if (checkHorizontalWin() != false ) {
+
+            status.innerHTML = checkHorizontalWin();
+
+
+            // console.log("We have a winner!");
+        } 
+        else if (checkVerticalWin() != false) {
+            status.innerHTML = checkVerticalWin();
+            // console.log("No winner yet.");
         }
+        else if (checkDiagonalWin() != false) {
+            status.innerHTML = checkDiagonalWin();
+
+
+            
+        }
+
     }
     
 
