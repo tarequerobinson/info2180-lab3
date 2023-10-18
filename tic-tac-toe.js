@@ -18,27 +18,26 @@ document.addEventListener('DOMContentLoaded', function () {
       console.log(newGameButtom);
 
       newGameButtom.onclick = function() {
-        // for (var i = 0; i < squares.length; i++) {
-        //     squares[i].innerHTML = '';
-        //   }
+        for (var i = 0; i < squares.length; i++) {
+          squares[i].innerHTML = '';
+          squares[i].classList.remove('X');
+          squares[i].classList.remove('O');
+        }
 
-        //   status.innerHTML = "Move your mouse over a square and click to play an X or an O.";
+        status.innerHTML ='Move your mouse over a square and click to play an X or an O.';
+        status.classList.remove('you-won');
 
-        //   gameBoard = [
-        //     ['', '', ''],
-        //     ['', '', ''],
-        //     ['', '', '']
-        //   ];
 
-        //   addClickListeners();
-        //   handleSquareClick();
-    
+        gameBoard = [
+          ['', '', ''],
+          ['', '', ''],
+          ['', '', '']
+        ];
+  
+        // location.reload() 
 
-        //   console.log("game reset");
-        location.reload() 
-
-        // alert("Button clicked!");
     };
+    
     
 
 
